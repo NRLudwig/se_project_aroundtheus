@@ -1,0 +1,136 @@
+.profile {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3%;
+  max-width: 880px;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile__info-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile__image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.profile__name {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1.14;
+  margin-left: 25px;
+  align-self: center;
+}
+
+.profile__subtitle {
+  display: block;
+  font-family: Inter_thin, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 1.2;
+  margin-top: 0.5em;
+}
+
+.profile__edit-button {
+  background-color: #000;
+  border-color: #fff;
+  border-width: 1px;
+  width: 24px;
+  height: 24px;
+  padding: 0%;
+  position: relative;
+  top: 15px;
+}
+
+.profile__edit-button:hover {
+  opacity: .6;
+  transition: ease-in-out .2s;
+}
+
+.profile__edit-button_image {
+  height: 10px;
+  width: 10px;
+  position: relative;
+  bottom: 23px;
+}
+
+.profile__add-button:hover {
+  opacity: .6;
+  transition: ease-in-out .2s;
+}
+
+.profile__add-button {
+  width: 150px;
+  height: 50px;
+  background-color: #000;
+  border-color: #fff;
+  align-self: center;
+}
+
+.profile__add-button_image {
+  height: 22px;
+  width: 22px;
+}
+
+ @media screen and (max-width: 865px) {
+
+  .profile {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile__add-button {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 282px;
+    border-radius: 10px;
+    margin-bottom: 1.5em;
+  }
+
+ }
+
+@media screen and (max-width: 573px) {
+
+.profile__info-wrapper {
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile__name {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 22px;
+  line-height: 1.2;
+  margin-bottom: 1.5em;
+}
+
+.profile__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    line-height: 1.2;
+    width: fit-content;
+    margin-top: 0.75em;
+  }
+
+  .profile__edit-button {
+    position: relative;
+    top: 4px;
+    height: 18px;
+    width: 18px;
+    border-radius: 2px;
+  }
+
+  .profile__edit-button_image {
+    position: relative;
+    bottom: 8px;
+    height: 7.49px;
+    width: 7.5px;
+  }
+}

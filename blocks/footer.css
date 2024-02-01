@@ -1,0 +1,20 @@
+.footer {
+padding-left: 200px;
+}
+
+.footer__copyright {
+  color: #545454;
+  width: fit-content;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: calc(21.78 / 18);
+  margin-top: 4em;
+  margin-bottom: 2em;
+}
+
+@media screen and (max-width: 880px) {
+  .footer {
+    padding-left: 19px;
+  }
+}

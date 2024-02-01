@@ -1,0 +1,47 @@
+.card {
+  width: 282px;
+  height: 361px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.card__image {
+  height: 282px;
+  width: 282px;
+  border-radius: 10px 10px 0 0;
+}
+
+.card__description-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card__title {
+  width: 219px;
+  height: 29px;
+  max-width: 219px;
+  background-color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: Inter_bold, Arial, Helvetica, sans-serif;
+}
+
+.card__image-heart {
+  width: 21px;
+  height: 18px;
+  align-self: center;
+}
+
+.card__heart-button {
+  padding: 0;
+  height: 18px;
+  align-self: center;
+  border: 0;
+  background-color: #fff;
+}
+
+.card__heart-button:hover {
+  opacity: 0.6;
+  transition: ease-in-out 0.2s;
+}
