@@ -19,3 +19,9 @@ This project is made so all the elements are displayed correctly on popular scre
 The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
   
 Good luck and have fun!
+
+
+
+Here is a link to my video submission https://drive.google.com/file/d/1PxHrkgAeLhkAcFkoxk6OMIo4cmYKGPHA/view?usp=drive_link 
+
+This project was a lot of fun, very hard and very rewarding. I felt I was able to really sink alot of stuff in surrounding GRID. I understand now what is expected from a responsive website. Break points are clear. Over all it was a great time. 
