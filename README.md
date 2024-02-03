@@ -20,8 +20,25 @@ The way you'll do this at work is by exporting images directly from Figma — we
   
 Good luck and have fun!
 
+**GitHub Pages Link**
+https://nrludwig.github.io/se_project_aroundtheus/
 
-
+**Video Link**
 Here is a link to my video submission https://drive.google.com/file/d/1PxHrkgAeLhkAcFkoxk6OMIo4cmYKGPHA/view?usp=drive_link 
 
+**Technologies**
+Created responsive design using advanced css tools. A combination of grid and flex box was used to achive the layout. 
+
+* HTML
+* CSS
+* Figma
+* Git 
+* BEM for code and file structure
+* Pen and a few sheets of paper lol
+
+
+
+**My Thoughts**
 This project was a lot of fun, very hard and very rewarding. I felt I was able to really sink alot of stuff in surrounding GRID. I understand now what is expected from a responsive website. Break points are clear. Over all it was a great time. 
+
+
