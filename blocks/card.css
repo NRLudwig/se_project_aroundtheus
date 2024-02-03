@@ -24,6 +24,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  color: black;
   font-family: Inter_bold, Arial, Helvetica, sans-serif;
 }
 
@@ -39,9 +40,9 @@
   align-self: center;
   border: 0;
   background-color: #fff;
+  transition: ease-in-out 0.1s;
 }
 
 .card__heart-button:hover {
-  opacity: 0.6;
-  transition: ease-in-out 0.2s;
+  opacity: 0.5;
 }

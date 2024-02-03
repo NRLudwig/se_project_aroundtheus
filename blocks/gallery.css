@@ -1,11 +1,11 @@
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  max-width: 880px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2em;
-  column-gap: 10px;
-  row-gap:18px;
-  max-width: 880px;
-  justify-items: center;
+
+  display: grid;
+  column-gap: 17px;
+  row-gap: 20px;
+  grid-template-columns: repeat(auto-fit, 282px);
+  justify-content: center;
 }
