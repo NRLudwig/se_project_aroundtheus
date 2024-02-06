@@ -2,9 +2,12 @@
   background-color: black;
   color: white;
   box-sizing: border-box;
+  padding-top: 45px;
+  
 }
 
-.content-wrapper {
-  padding-left: 19px;
-  padding-right: 19px;
+@media screen and (max-width: 770px) {
+  .page {
+    padding-top: 28px;
+  }
 }

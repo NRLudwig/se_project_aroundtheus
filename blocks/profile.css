@@ -46,7 +46,6 @@
   height: 24px;
   width: 24px;
   border: 1px solid #fff;
-  border-radius: 2px;
   transition: ease-in-out 0.1s;
   position: relative;
   bottom: 10px;
@@ -75,6 +74,7 @@
   width: 150px;
   height: 50px;
   border: 2px solid #fff;
+  border-radius: 2px;
   transition: ease-in-out 0.1s;
   grid-area: add-button;
   align-self: center;
@@ -123,6 +123,7 @@
   .profile__info-wrapper {
     margin-left: auto;
     margin-right: auto;
+    padding: 0;
   }
 
   .profile__name {

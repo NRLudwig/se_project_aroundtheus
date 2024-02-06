@@ -1,8 +1,3 @@
-.footer-wrapper {
-  padding-left: 19px;
-  padding-right: 19px;
-}
-
 .footer {
   display: flex;
   max-width: 880px;
@@ -20,6 +15,14 @@
   line-height: 1.2;
   color: #545454;
 }
+
+@media screen and (max-width: 907px) {
+  .footer {
+    padding-left: 19px;
+  }
+
+}
+
 
 @media screen and (max-width: 560px) {
   .footer {
