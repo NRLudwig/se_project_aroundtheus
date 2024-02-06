@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 546px) {
+@media screen and (max-width: 560px) {
   .gallery {
     margin-top: 36px;
   }
