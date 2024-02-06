@@ -1,9 +1,15 @@
+.footer-wrapper {
+  padding-left: 19px;
+  padding-right: 19px;
+}
+
 .footer {
   display: flex;
   max-width: 880px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 67px;
+  padding-bottom: 60px;
 }
 
 .footer__copyright {
@@ -15,9 +21,10 @@
   color: #545454;
 }
 
-@media screen and (max-width: 546px) {
+@media screen and (max-width: 560px) {
   .footer {
     margin-top: 48px;
+    padding-bottom: 36px;
   }
 
   .footer__copyright {
