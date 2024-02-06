@@ -15,11 +15,11 @@
   color: #545454;
 }
 
-@media screen and (max-width: 524px) {
+@media screen and (max-width: 546px) {
   .footer {
     margin-top: 48px;
   }
-  
+
   .footer__copyright {
     font-size: 14px;
   }
