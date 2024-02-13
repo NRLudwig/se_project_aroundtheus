@@ -10,16 +10,20 @@
   </head>
   <body>
     <div class="page">
-        <header class="header">
-          <img
-            class="header__logo"
-            src="./images/logo.svg"
-            alt="Around the U.S."
-          />
-        </header>
+      <header class="header">
+        <img
+          class="header__logo"
+          src="./images/logo.svg"
+          alt="Around the U.S."
+        />
+      </header>
       <main class="content-wrapper">
         <section class="profile">
-          <img class="profile__image" src="./images/jacques-cousteau.svg" alt="avatar"/>
+          <img
+            class="profile__image"
+            src="./images/jacques-cousteau.svg"
+            alt="avatar"
+          />
           <div class="profile__info-wrapper">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <button class="profile__edit-button" type="button"></button>
@@ -29,42 +33,58 @@
         </section>
         <section class="gallery">
           <article class="card">
-            <img class="card__image" src="./images/yosemite.jpg" alt="yosemite" />
+            <img
+              class="card__image"
+              src="./images/yosemite.jpg"
+              alt="yosemite"
+            />
             <div class="card__description-wrapper">
               <h2 class="card__title">Yosemite Valley</h2>
               <button class="card__heart-button" type="button"></button>
             </div>
           </article>
           <article class="card">
-            <img class="card__image" src="./images/lake-louise.jpg" alt="lake louise" />
+            <img
+              class="card__image"
+              src="./images/lake-louise.jpg"
+              alt="lake louise"
+            />
             <div class="card__description-wrapper">
               <h2 class="card__title">Lake Louise</h2>
               <button class="card__heart-button" type="button"></button>
             </div>
           </article>
           <article class="card">
-            <img class="card__image" src="./images/bald-mountains.jpg" alt="bald mountain" />
+            <img
+              class="card__image"
+              src="./images/bald-mountains.jpg"
+              alt="bald mountain"
+            />
             <div class="card__description-wrapper">
               <h2 class="card__title">Bald Mountains</h2>
               <button class="card__heart-button" type="button"></button>
             </div>
           </article>
           <article class="card">
-            <img class="card__image" src="./images/latemar.jpg" alt="lateamar"/>
+            <img
+              class="card__image"
+              src="./images/latemar.jpg"
+              alt="lateamar"
+            />
             <div class="card__description-wrapper">
               <h2 class="card__title">LateMar</h2>
               <button class="card__heart-button" type="button"></button>
             </div>
           </article>
           <article class="card">
-            <img class="card__image" src="./images/vanoise.jpg" alt="vanoise"/>
+            <img class="card__image" src="./images/vanoise.jpg" alt="vanoise" />
             <div class="card__description-wrapper">
               <h2 class="card__title">Vanoise National Park</h2>
               <button class="card__heart-button" type="button"></button>
             </div>
           </article>
           <article class="card">
-            <img class="card__image" src="./images/lago.jpg" alt="lago"/>
+            <img class="card__image" src="./images/lago.jpg" alt="lago" />
             <div class="card__description-wrapper">
               <h2 class="card__title">Lago di Braies</h2>
               <button class="card__heart-button" type="button"></button>
@@ -72,10 +92,23 @@
           </article>
         </section>
       </main>
-        <footer class="footer">
-          <p class="footer__copyright">&copy; 2022 Around the U.S.</p>
-        </footer>
+      <footer class="footer">
+        <p class="footer__copyright">&copy; 2022 Around the U.S.</p>
+      </footer>
     </div>
+
+    <div class="modal">
+      <div class="modal__container">
+        <h2 class="modal__heading">Edit profile</h2>
+        <form class="modal__form">
+          <input class="modal__text-input" type="text" placeholder="Name" />
+          <input class="modal__text-input" type="text" placeholder="About me" />
+          <button class="modal__save-button" type="submit">Save</button>
+          <button class="modal__close-button" type="button"></button>
+        </form>
+      </div>
+    </div>
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>
