@@ -24,22 +24,66 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-//to open modal
-let profileEditBtn = document.querySelector(".profile__edit-button");
 
+// elements
+let profileEditBtn = document.querySelector(".profile__edit-button");
+let modalCloseBtn = document.querySelector(".modal__close-button");
+let modalSaveBtn = document.querySelector(".modal__save-button");
+const cardGalleryEL = document.querySelector(".gallery");
+const cardTemplate =
+  document.querySelector("#card__template").content.firstElementChild;
+
+// functions
 function openModalHandler() {
   let modal = document.querySelector(".modal");
   modal.classList.add("modal_opened");
+  let inputName = document.querySelector(".modal__text-input_type_name");
+  let inputSubtitle = document.querySelector(
+    ".modal__text-input_type_subtitle"
+  );
+
+  let profileName = document.querySelector(".profile__name");
+  let profileSubtitle = document.querySelector(".profile__subtitle");
+
+  inputName.value = profileName.textContent;
+  inputSubtitle.value = profileSubtitle.textContent;
 }
-
-profileEditBtn.addEventListener("click", openModalHandler);
-
-//to close modal
-let modalCloseBtn = document.querySelector(".modal__close-button");
-
 function closeModalHandler() {
   let modal = document.querySelector(".modal");
   modal.classList.remove("modal_opened");
 }
+function updateProfileInfo(event) {
+  let inputName = document.querySelector(".modal__text-input_type_name");
+  let inputSubtitle = document.querySelector(
+    ".modal__text-input_type_subtitle"
+  );
 
+  let profileName = document.querySelector(".profile__name");
+  let profileSubtitle = document.querySelector(".profile__subtitle");
+
+  profileName.textContent = inputName.value;
+  profileSubtitle.textContent = inputSubtitle.value;
+  closeModalHandler();
+  event.preventDefault();
+}
+function getCardElement(cardData) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImageEl = cardElement.querySelector(".card__image");
+  const cardTitleEl = cardElement.querySelector(".card__title");
+  cardImageEl.setAttribute("src", cardData.link);
+  cardImageEl.setAttribute("alt", cardData.name);
+  cardTitleEl.textContent = cardData.name;
+  return cardElement;
+}
+
+// events
+profileEditBtn.addEventListener("click", openModalHandler);
 modalCloseBtn.addEventListener("click", closeModalHandler);
+modalSaveBtn.addEventListener("click", updateProfileInfo);
+
+// loops
+
+initialCards.forEach((cardData) => {
+  const newCardElement = getCardElement(cardData);
+  cardGalleryEL.prepend(newCardElement);
+});

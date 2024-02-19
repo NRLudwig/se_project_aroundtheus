@@ -59,7 +59,7 @@
 
 .profile__subtitle {
   margin: 0;
-  width: fit-content;
+  min-width: 100%;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -119,7 +119,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-
   }
 
   .profile__image {
@@ -148,6 +147,7 @@
 
   .profile__subtitle {
     padding: 0;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 36px;
