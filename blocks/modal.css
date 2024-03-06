@@ -11,6 +11,10 @@
   z-index: 999;
 }
 
+/* .modal_new-place {
+  display: flex;
+} */
+
 .modal_opened {
   display: flex;
 }
@@ -51,7 +55,7 @@
   padding-bottom: 13px;
 }
 
-.modal__profile-button_save {
+.modal__button-save {
   margin-top: 18px;
   height: 50px;
   border: 0;
@@ -66,11 +70,11 @@
   cursor: pointer;
 }
 
-.modal__profile-button_save:hover {
+.modal__button-save:hover {
   opacity: 0.8;
 }
 
-.modal__profile-button_close {
+.modal__button-close {
   position: absolute;
   top: -43px;
   right: -43px;
@@ -85,7 +89,7 @@
   cursor: pointer;
 }
 
-.modal__profile-button_close:hover {
+.modal__button-close:hover {
   opacity: 0.6;
 }
 
@@ -104,11 +108,11 @@
     margin-bottom: 75px;
   }
 
-  .modal__profile-button_save {
+  .modal__button-save {
     margin-top: 15px;
   }
 
-  .modal__profile-button_close {
+  .modal__button-close {
     height: 26px;
     width: 26px;
     top: -39px;

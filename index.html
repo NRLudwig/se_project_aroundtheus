@@ -38,7 +38,7 @@
       </footer>
     </div>
 
-    <div class="modal">
+    <div class="modal modal_profile-edit">
       <div class="modal__container">
         <h2 class="modal__heading">Edit profile</h2>
         <form class="modal__form">
@@ -55,21 +55,53 @@
             required
           />
           <button
-            class="modal__profile-button modal__profile-button_save"
+            class="modal__button-save modal__button-save_profile-edit"
             type="submit"
           >
             Save
           </button>
           <button
-            class="modal__profile-button modal__profile-button_close"
+            class="modal__button-close modal__button-close_profile-edit"
             type="button"
           ></button>
         </form>
       </div>
     </div>
+
+    <div class="modal modal_new-place">
+      <div class="modal__container">
+        <h2 class="modal__heading">New Place</h2>
+        <form class="modal__form">
+          <input
+            class="modal__text-input modal__text-input_type_title"
+            type="text"
+            placeholder="Title"
+            required
+          />
+          <input
+            class="modal__text-input modal__text-input_type_image"
+            type="text"
+            placeholder="Image URL"
+            required
+          />
+          <button
+            class="modal__button-save modal__button-save_new-place"
+            type="submit"
+          >
+            Save
+          </button>
+          <button
+            class="modal__button-close modal__button-close_new-place"
+            type="button"
+          ></button>
+        </form>
+      </div>
+    </div>
+
     <template id="card__template">
       <article class="card">
         <img class="card__image" src="" alt="" />
+        <button class="card__delete-button" type="button"></button>
         <div class="card__description-wrapper">
           <h2 class="card__title"></h2>
           <button class="card__heart-button" type="button"></button>

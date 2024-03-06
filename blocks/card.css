@@ -2,6 +2,7 @@
   width: 282px;
   background-color: #fff;
   border-radius: 10px;
+  position: relative;
 }
 
 .card__image {
@@ -43,6 +44,27 @@
   cursor: pointer;
 }
 
+.card__heart-button_active {
+  background: transparent url(../images/black-heart-button.svg) center no-repeat;
+}
+
 .card__heart-button:hover {
+  opacity: 0.5;
+}
+
+.card__delete-button {
+  background: transparent url(../images/Trash-can.svg) center no-repeat;
+  height: 19.3px;
+  width: 18px;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  transition: ease-in-out 0.2s;
+}
+
+.card__delete-button:hover {
   opacity: 0.5;
 }
