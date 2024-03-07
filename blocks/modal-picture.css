@@ -1,0 +1,26 @@
+.modal-picture__container {
+  position: relative;
+  margin: auto;
+}
+.modal-picture__image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.modal-picture__title {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  color: #fff;
+  font-size: 12px;
+  line-height: 14.52px;
+  font-weight: 400;
+  margin: 10px 0 0;
+}
+
+@media screen and (max-width: 778px) {
+  .modal__button-close_picture {
+    top: -33px;
+    right: -33px;
+    height: 30px;
+    width: 30px;
+  }
+}

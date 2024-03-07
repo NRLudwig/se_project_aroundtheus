@@ -78,6 +78,7 @@ function getCardElement(cardData) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const heartBtn = cardElement.querySelector(".card__heart-button");
   const deleteCardBtn = cardElement.querySelector(".card__delete-button");
+  cardTitleEl.textContent = cardData.title;
   cardImageEl.setAttribute("src", cardData.link);
   cardImageEl.setAttribute("alt", cardData.title);
   heartBtn.addEventListener("click", function () {
@@ -86,7 +87,6 @@ function getCardElement(cardData) {
   deleteCardBtn.addEventListener("click", function () {
     cardElement.remove();
   });
-  cardTitleEl.textContent = cardData.title;
   return cardElement;
 }
 function addNewCard() {
@@ -127,6 +127,7 @@ addNewImageSaveBtn.addEventListener("click", function (event) {
   addNewCard();
   closeModal(newPlaceModal);
 });
+
 // loops
 initialCards.forEach((cardData) => {
   const newCardElement = getCardElement(cardData);
