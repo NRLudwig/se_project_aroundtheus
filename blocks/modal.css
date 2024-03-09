@@ -1,5 +1,8 @@
 .modal {
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s linear;
   position: fixed;
   top: 0;
   right: 0;
@@ -11,12 +14,9 @@
   z-index: 999;
 }
 
-/* .modal_new-place {
-  display: flex;
-} */
-
 .modal_opened {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
