@@ -26,19 +26,20 @@ const initialCards = [
 ];
 
 // elements
-const form = document.querySelector(".modal__form");
+const formProfileEdit = document.querySelector(".modal__form_profile");
+const formNewPlace = document.querySelector(".modal__form_new-place");
 const cardGalleryEL = document.querySelector(".gallery");
 const cardTemplate =
   document.querySelector("#card__template").content.firstElementChild;
 const modalPictureImageEl = document.querySelector(".modal-picture__image");
 const modalPictureTitleEl = document.querySelector(".modal-picture__title");
+const profileName = document.querySelector(".profile__name");
+const profileSubtitle = document.querySelector(".profile__subtitle");
 // input elements
 const inputName = document.querySelector(".modal__text-input_type_name");
 const inputSubtitle = document.querySelector(
   ".modal__text-input_type_subtitle"
 );
-const profileName = document.querySelector(".profile__name");
-const profileSubtitle = document.querySelector(".profile__subtitle");
 const cardTitleInput = document.querySelector(".modal__text-input_type_title");
 const cardImageInput = document.querySelector(".modal__text-input_type_image");
 // button elements
@@ -55,9 +56,6 @@ const addNewImageSaveBtn = document.querySelector(
 const newPlaceModal = document.querySelector(".modal_new-place");
 const profileEditModal = document.querySelector(".modal_profile-edit");
 const modalPicture = document.querySelector(".modal_picture");
-//test
-
-// end test
 // functions
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -111,7 +109,10 @@ function fillNewPlaceInfo() {
   cardTitleInput.value = "";
 }
 //events
-form.addEventListener("submit", function (event) {
+formProfileEdit.addEventListener("submit", function (event) {
+  event.preventDefault();
+});
+formNewPlace.addEventListener("submit", function (event) {
   event.preventDefault();
 });
 profileEditBtn.addEventListener("click", function () {
@@ -139,5 +140,3 @@ closeBtns.forEach((button) => {
   const nearestModal = button.closest(".modal");
   button.addEventListener("click", () => closeModal(nearestModal));
 });
-
-//modal-picture
