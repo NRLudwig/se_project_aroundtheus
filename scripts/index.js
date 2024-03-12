@@ -109,24 +109,20 @@ function clearNewPlaceInfo() {
 //events
 formProfileEdit.addEventListener("submit", function (event) {
   event.preventDefault();
+  updateProfileInfo();
 });
 formNewPlace.addEventListener("submit", function (event) {
   event.preventDefault();
+  addNewCard();
+  closeModal(newPlaceModal);
+  clearNewPlaceInfo();
 });
 profileEditBtn.addEventListener("click", function () {
   openModal(profileEditModal);
   fillProfileForm();
 });
-profileModalSaveBtn.addEventListener("click", function () {
-  updateProfileInfo();
-});
 addNewImageBtn.addEventListener("click", function () {
   openModal(newPlaceModal);
-});
-addNewImageSaveBtn.addEventListener("click", function () {
-  addNewCard();
-  closeModal(newPlaceModal);
-  clearNewPlaceInfo();
 });
 // loops
 initialCards.forEach((cardData) => {
