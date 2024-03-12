@@ -99,12 +99,10 @@ function addNewCard() {
   const newCard = {};
   newCard.title = cardTitleInput.value;
   newCard.link = cardImageInput.value;
-  initialCards.push(newCard);
-
   const newCardElement = getCardElement(newCard);
   cardGalleryEL.prepend(newCardElement);
 }
-function fillNewPlaceInfo() {
+function clearNewPlaceInfo() {
   cardImageInput.value = "";
   cardTitleInput.value = "";
 }
@@ -124,11 +122,11 @@ profileModalSaveBtn.addEventListener("click", function () {
 });
 addNewImageBtn.addEventListener("click", function () {
   openModal(newPlaceModal);
-  fillNewPlaceInfo();
 });
 addNewImageSaveBtn.addEventListener("click", function () {
   addNewCard();
   closeModal(newPlaceModal);
+  clearNewPlaceInfo();
 });
 // loops
 initialCards.forEach((cardData) => {
