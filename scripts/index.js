@@ -106,6 +106,19 @@ function clearNewPlaceInfo() {
   cardImageInput.value = "";
   cardTitleInput.value = "";
 }
+function handleChangeFocusModalClose(modal, evt) {
+  const target = evt.target;
+  if (target === modal) {
+    modal.classList.remove("modal_opened");
+  }
+}
+
+function handleEscapeKeydown(modal, evt) {
+  const key = evt.key;
+  if (key === "Escape") {
+    modal.classList.remove("modal_opened");
+  }
+}
 //events
 formProfileEdit.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -123,6 +136,30 @@ profileEditBtn.addEventListener("click", function () {
 });
 addNewImageBtn.addEventListener("click", function () {
   openModal(newPlaceModal);
+});
+
+profileEditModal.addEventListener("click", function (evt) {
+  handleChangeFocusModalClose(profileEditModal, evt);
+});
+
+newPlaceModal.addEventListener("click", function (evt) {
+  handleChangeFocusModalClose(newPlaceModal, evt);
+});
+
+modalPicture.addEventListener("click", function (evt) {
+  handleChangeFocusModalClose(modalPicture, evt);
+});
+
+document.addEventListener("keydown", function (evt) {
+  handleEscapeKeydown(profileEditModal, evt);
+});
+
+document.addEventListener("keydown", function (evt) {
+  handleEscapeKeydown(newPlaceModal, evt);
+});
+
+document.addEventListener("keydown", function (evt) {
+  handleEscapeKeydown(modalPicture, evt);
 });
 // loops
 initialCards.forEach((cardData) => {
