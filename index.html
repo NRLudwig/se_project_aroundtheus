@@ -41,19 +41,27 @@
     <div class="modal modal_profile-edit">
       <div class="modal__container">
         <h2 class="modal__heading">Edit profile</h2>
-        <form class="modal__form modal__form_profile">
+        <form novalidate class="modal__form modal__form_profile">
           <input
+            id="profile__name-input"
             class="modal__text-input modal__text-input_type_name"
             type="text"
             placeholder="Name"
             required
+            minlength="2"
+            maxlength="40"
           />
+          <span class="input_error profile__name-input_error"></span>
           <input
+            id="profile__about-input"
             class="modal__text-input modal__text-input_type_subtitle"
             type="text"
             placeholder="About me"
             required
+            minlength="2"
+            maxlength="200"
           />
+          <span class="input_error profile__about-input_error"></span>
           <button
             class="modal__button-save modal__button-save_profile-edit"
             type="submit"
@@ -71,22 +79,29 @@
     <div class="modal modal_new-place">
       <div class="modal__container">
         <h2 class="modal__heading">New Place</h2>
-        <form class="modal__form modal__form_new-place">
+        <form novalidate class="modal__form modal__form_new-place">
           <input
+            id="new-place_title-input"
             class="modal__text-input modal__text-input_type_title"
             type="text"
             placeholder="Title"
             required
+            minlength="1"
+            maxlength="30"
           />
+          <span class="input_error new-place_title-input_error"></span>
           <input
+            id="new-place_url-input"
             class="modal__text-input modal__text-input_type_image"
-            type="text"
+            type="url"
             placeholder="Image URL"
             required
           />
+          <span class="input_error new-place_url-input_error"></span>
           <button
             class="modal__button-save modal__button-save_new-place"
             type="submit"
+            disabled
           >
             Create
           </button>

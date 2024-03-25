@@ -35,6 +35,9 @@ const modalPictureImageEl = document.querySelector(".modal-picture__image");
 const modalPictureTitleEl = document.querySelector(".modal-picture__title");
 const profileName = document.querySelector(".profile__name");
 const profileSubtitle = document.querySelector(".profile__subtitle");
+// forms
+const profileForm = document.querySelector(".modal__form_profile");
+const newPlaceForm = document.querySelector(".modal__form_new-place");
 // input elements
 const inputName = document.querySelector(".modal__text-input_type_name");
 const inputSubtitle = document.querySelector(
@@ -42,6 +45,12 @@ const inputSubtitle = document.querySelector(
 );
 const cardTitleInput = document.querySelector(".modal__text-input_type_title");
 const cardImageInput = document.querySelector(".modal__text-input_type_image");
+const profileInputsArray = Array.from(
+  profileForm.querySelectorAll(".modal__text-input")
+);
+const newPlaceInputsArray = Array.from(
+  newPlaceForm.querySelectorAll(".modal__text-input")
+);
 // button elements
 const closeBtns = document.querySelectorAll(".modal__button-close");
 const profileEditBtn = document.querySelector(".profile__edit-button");
@@ -109,14 +118,14 @@ function clearNewPlaceInfo() {
 function handleChangeFocusModalClose(modal, evt) {
   const target = evt.target;
   if (target === modal) {
-    modal.classList.remove("modal_opened");
+    closeModal(modal);
   }
 }
 
 function handleEscapeKeydown(modal, evt) {
   const key = evt.key;
   if (key === "Escape") {
-    modal.classList.remove("modal_opened");
+    closeModal(modal);
   }
 }
 //events
@@ -133,9 +142,17 @@ formNewPlace.addEventListener("submit", function (event) {
 profileEditBtn.addEventListener("click", function () {
   openModal(profileEditModal);
   fillProfileForm();
+  checkFormValidation(profileForm, profileInputsArray);
+  profileInputsArray.forEach(function (input) {
+    hideInputError(profileForm, input);
+  });
 });
 addNewImageBtn.addEventListener("click", function () {
   openModal(newPlaceModal);
+  checkFormValidation(newPlaceForm, newPlaceInputsArray);
+  newPlaceInputsArray.forEach(function (input) {
+    showInputError(newPlaceForm, input);
+  });
 });
 
 profileEditModal.addEventListener("click", function (evt) {
