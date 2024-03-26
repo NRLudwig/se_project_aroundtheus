@@ -15,7 +15,7 @@ function checkInputValidity(form, input) {
   }
 }
 
-function checkFormValidation(form, inputsArray) {
+function toggleButtonState(form, inputsArray) {
   const btn = form.querySelector(config.submitBtn);
   inputsArray.every(function (input) {
     res = input.validity.valid === true;
@@ -33,7 +33,7 @@ function setEventListeners(form) {
   inputList.forEach(function (input) {
     input.addEventListener("input", function () {
       checkInputValidity(form, input);
-      checkFormValidation(form, inputList);
+      toggleButtonState(form, inputList);
     });
   });
 }
@@ -42,9 +42,9 @@ function enableValidation(config) {
   const formList = Array.from(document.querySelectorAll(config.form));
   formList.forEach(function (form) {
     form.addEventListener("submit", function (evt) {
-      evt.preventDefault;
+      evt.preventDefault();
     });
-    setEventListeners(form);
+    setEventListeners(form, config);
   });
 }
 
