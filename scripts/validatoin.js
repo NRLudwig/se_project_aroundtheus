@@ -28,7 +28,7 @@ function toggleButtonState(form, inputsArray) {
   }
 }
 
-function setEventListeners(form) {
+function setEventListeners(form, config) {
   const inputList = Array.from(form.querySelectorAll(config.input));
   inputList.forEach(function (input) {
     input.addEventListener("input", function () {

@@ -67,18 +67,15 @@ const newPlaceModal = document.querySelector(".modal_new-place");
 const profileEditModal = document.querySelector(".modal_profile-edit");
 const modalPicture = document.querySelector(".modal_picture");
 // functions
+
 function openModal(modal) {
-  document.addEventListener("keydown", function handler(evt) {
-    const key = evt.key;
-    if (key === "Escape") {
-      closeModal(modal);
-      document.removeEventListener("keydown", handler);
-    }
-  });
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", escToCloseModal);
 }
+
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", escToCloseModal);
 }
 function fillProfileForm() {
   inputName.value = profileName.textContent;
@@ -131,8 +128,8 @@ formProfileEdit.addEventListener("submit", function (event) {
 formNewPlace.addEventListener("submit", function (event) {
   event.preventDefault();
   addNewCard();
-  closeModal(newPlaceModal);
   clearNewPlaceInfo();
+  closeModal(newPlaceModal);
 });
 profileEditBtn.addEventListener("click", function () {
   openModal(profileEditModal);
@@ -163,3 +160,13 @@ modals.forEach(function (modal) {
     }
   });
 });
+
+function escToCloseModal(e) {
+  console.log(e);
+  const key = e.code;
+  console.log(e.code);
+  const openModal = document.querySelector(".modal_opened");
+  if (key === "Escape") {
+    closeModal(openModal);
+  }
+}
