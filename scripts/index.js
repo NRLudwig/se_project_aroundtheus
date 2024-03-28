@@ -70,12 +70,12 @@ const modalPicture = document.querySelector(".modal_picture");
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", escToCloseModal);
+  document.addEventListener("keydown", closeModalWithEsc);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", escToCloseModal);
+  document.removeEventListener("keydown", closeModalWithEsc);
 }
 function fillProfileForm() {
   inputName.value = profileName.textContent;
@@ -161,12 +161,10 @@ modals.forEach(function (modal) {
   });
 });
 
-function escToCloseModal(e) {
-  console.log(e);
+function closeModalWithEsc(e) {
   const key = e.code;
-  console.log(e.code);
-  const openModal = document.querySelector(".modal_opened");
   if (key === "Escape") {
+    const openModal = document.querySelector(".modal_opened");
     closeModal(openModal);
   }
 }
