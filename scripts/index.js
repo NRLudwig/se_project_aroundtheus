@@ -27,8 +27,6 @@ const initialCards = [
 
 // elements
 const modals = Array.from(document.querySelectorAll(".modal"));
-const formProfileEdit = document.querySelector(".modal__form_profile");
-const formNewPlace = document.querySelector(".modal__form_new-place");
 const cardGalleryEL = document.querySelector(".gallery");
 const cardTemplate =
   document.querySelector("#card__template").content.firstElementChild;
@@ -53,7 +51,6 @@ const newPlaceInputsArray = Array.from(
   newPlaceForm.querySelectorAll(".modal__text-input")
 );
 // button elements
-const closeBtns = document.querySelectorAll(".modal__button-close");
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const profileModalSaveBtn = document.querySelector(
   ".modal__button-save_profile-edit"
@@ -121,11 +118,11 @@ function clearNewPlaceInfo() {
   cardTitleInput.value = "";
 }
 //events
-formProfileEdit.addEventListener("submit", function (event) {
+profileForm.addEventListener("submit", function (event) {
   event.preventDefault();
   updateProfileInfo();
 });
-formNewPlace.addEventListener("submit", function (event) {
+newPlaceForm.addEventListener("submit", function (event) {
   event.preventDefault();
   addNewCard();
   clearNewPlaceInfo();
