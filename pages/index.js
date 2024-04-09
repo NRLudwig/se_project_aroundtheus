@@ -1,3 +1,6 @@
+import { Card } from "../components/card.js";
+import { FormValidator } from "../components/formValidation.js";
+
 const initialCards = [
   {
     title: "Yosemite Valley",
@@ -24,52 +27,12 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-///////////////////////////////////////////////////////////////////////////////////////////////
-//test test test//
-//this Card class is a test and substituting for the getCardElement function
-
-class Card {
-  constructor(data, cardSelector, imagePopUpHandler) {
-    this._title = data.title;
-    this._link = data.link;
-    this._cardSelector = cardSelector;
-    this.imagePopUpHandler = imagePopUpHandler;
-  }
-  _getTemplate() {
-    const cardElement = document
-      .querySelector("#card__template")
-      .content.firstElementChild.cloneNode(true);
-    return cardElement;
-  }
-
-  generateCard() {
-    const cardElement = this._getTemplate();
-    cardElement.querySelector(".card__image").src = this._link;
-    cardElement.querySelector(".card__image").alt = this._title;
-    cardElement.querySelector(".card__title").textContent = this._title;
-    this._setEventListeners(cardElement);
-    this.imagePopUpHandler(cardElement);
-    return cardElement;
-  }
-
-  _setEventListeners(cardElement) {
-    cardElement
-      .querySelector(".card__heart-button")
-      .addEventListener("click", () => {
-        cardElement
-          .querySelector(".card__heart-button")
-          .classList.toggle("card__heart-button_active");
-      });
-    cardElement
-      .querySelector(".card__delete-button")
-      .addEventListener("click", function () {
-        cardElement.remove();
-      });
-  }
-}
-////    end   /////
-//test test test//
-///////////////////////////////////////////////////////////////////////////////////////////////
+//config object
+const config = {
+  form: ".modal__form",
+  input: ".modal__text-input",
+  submitBtn: ".modal__button-save",
+};
 // elements
 const modals = Array.from(document.querySelectorAll(".modal"));
 const cardGalleryEL = document.querySelector(".gallery");
@@ -184,16 +147,19 @@ newPlaceForm.addEventListener("submit", function (event) {
   closeModal(newPlaceModal);
 });
 profileEditBtn.addEventListener("click", function () {
+  const validator = new FormValidator(config, profileForm);
+  validator.enableValidation();
   openModal(profileEditModal);
   fillProfileForm();
-  toggleButtonState(profileForm, profileInputsArray);
   profileInputsArray.forEach(function (input) {
-    hideInputError(profileForm, input);
+    validator.hideInputError(input);
+    validator.toggleButtonState(profileForm, profileInputsArray);
   });
 });
 addNewImageBtn.addEventListener("click", function () {
   openModal(newPlaceModal);
-  toggleButtonState(newPlaceForm, newPlaceInputsArray);
+  const validator = new FormValidator(config, newPlaceForm);
+  validator.enableValidation();
 });
 // loops
 modals.forEach(function (modal) {
