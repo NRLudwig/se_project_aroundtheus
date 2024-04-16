@@ -10,22 +10,26 @@ export class FormValidator {
     inputList.forEach((input) => {
       input.addEventListener("input", () => {
         this._checkInputValidity(input);
-        this.toggleButtonState(this.formElement, inputList);
+        this.toggleButtonState();
       });
     });
   }
+
   _checkInputValidity(input) {
     if (!input.validity.valid) {
-      this.showInputError(input);
+      this.showInputError();
     } else {
-      this.hideInputError(input);
+      this.hideInputError();
     }
   }
 
-  toggleButtonState(form, inputsArray) {
-    const btn = form.querySelector(this.configObj.submitBtn);
+  toggleButtonState() {
+    const btn = this.formElement.querySelector(this.configObj.submitBtn);
+    const inputArray = Array.from(
+      this.formElement.querySelectorAll(this.configObj.input)
+    );
     if (
-      inputsArray.every((input) => {
+      inputArray.every((input) => {
         return input.validity.valid;
       })
     ) {
@@ -35,13 +39,25 @@ export class FormValidator {
     }
   }
 
-  showInputError(input) {
-    const errorSpanEle = this.formElement.querySelector(`.${input.id}_error`);
-    errorSpanEle.textContent = input.validationMessage;
+  showInputError() {
+    const inputsArray = Array.from(
+      this.formElement.querySelectorAll(this.configObj.input)
+    );
+    inputsArray.forEach(function (input) {
+      const errorElement = document.querySelector(`.${input.id}_error`);
+      errorElement.textContent = input.validationMessage;
+    });
   }
-  hideInputError(input) {
-    const errorSpanEle = this.formElement.querySelector(`.${input.id}_error`);
-    errorSpanEle.textContent = "";
+  hideInputError() {
+    const inputsArray = Array.from(
+      this.formElement.querySelectorAll(this.configObj.input)
+    );
+    inputsArray.forEach(function (input) {
+      const errorElement = document.querySelector(`.${input.id}_error`);
+      if (input.validity.valid) {
+        errorElement.textContent = "";
+      }
+    });
   }
 
   enableValidation() {

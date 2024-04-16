@@ -6,20 +6,27 @@ export class Card {
     this.imagePopUpHandler = imagePopUpHandler;
   }
   _getTemplate() {
-    const cardElement = document
-      .querySelector("#card__template")
+    this.cardElement = document
+      .querySelector(this._cardSelector)
       .content.firstElementChild.cloneNode(true);
-    return cardElement;
+    return this.cardElement;
   }
 
   generateCard() {
-    const cardElement = this._getTemplate();
-    cardElement.querySelector(".card__image").src = this._link;
-    cardElement.querySelector(".card__image").alt = this._title;
-    cardElement.querySelector(".card__title").textContent = this._title;
-    this._setEventListeners(cardElement);
-    this.imagePopUpHandler(cardElement);
-    return cardElement;
+    this.cardElement = this._getTemplate();
+    this.cardElement.querySelector(".card__image").src = this._link;
+    this.cardElement.querySelector(".card__image").alt = this._title;
+    this.cardElement.querySelector(".card__title").textContent = this._title;
+    this._setEventListeners(this.cardElement);
+    this.cardElement
+      .querySelector(".card__image")
+      .addEventListener("click", () => {
+        this.imagePopUpHandler(
+          this.cardElement,
+          this.cardElement.querySelector(".card__image")
+        );
+      });
+    return this.cardElement;
   }
 
   _setEventListeners(cardElement) {
