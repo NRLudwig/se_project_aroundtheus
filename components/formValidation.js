@@ -2,12 +2,13 @@ export class FormValidator {
   constructor(configObj, formElement) {
     this.configObj = configObj;
     this.formElement = formElement;
-  }
-  _setEventListeners() {
-    const inputList = Array.from(
+    this.btn = this.formElement.querySelector(this.configObj.submitBtn);
+    this.inputList = Array.from(
       this.formElement.querySelectorAll(this.configObj.input)
     );
-    inputList.forEach((input) => {
+  }
+  _setEventListeners() {
+    this.inputList.forEach((input) => {
       input.addEventListener("input", () => {
         this._checkInputValidity(input);
         this.toggleButtonState();
@@ -17,47 +18,34 @@ export class FormValidator {
 
   _checkInputValidity(input) {
     if (!input.validity.valid) {
-      this.showInputError();
+      this.showInputError(input);
     } else {
-      this.hideInputError();
+      this.hideInputError(input);
     }
   }
 
   toggleButtonState() {
-    const btn = this.formElement.querySelector(this.configObj.submitBtn);
-    const inputArray = Array.from(
-      this.formElement.querySelectorAll(this.configObj.input)
-    );
     if (
-      inputArray.every((input) => {
+      this.inputList.every((input) => {
+        input.validity.valid
+          ? this.hideInputError(input)
+          : (this.btn.disabled = true);
         return input.validity.valid;
       })
     ) {
-      btn.disabled = false;
+      this.btn.disabled = false;
     } else {
-      btn.disabled = true;
+      this.btn.disabled = true;
     }
   }
 
-  showInputError() {
-    const inputsArray = Array.from(
-      this.formElement.querySelectorAll(this.configObj.input)
-    );
-    inputsArray.forEach(function (input) {
-      const errorElement = document.querySelector(`.${input.id}_error`);
-      errorElement.textContent = input.validationMessage;
-    });
+  showInputError(input) {
+    const errorSpanEle = this.formElement.querySelector(`.${input.id}_error`);
+    errorSpanEle.textContent = input.validationMessage;
   }
-  hideInputError() {
-    const inputsArray = Array.from(
-      this.formElement.querySelectorAll(this.configObj.input)
-    );
-    inputsArray.forEach(function (input) {
-      const errorElement = document.querySelector(`.${input.id}_error`);
-      if (input.validity.valid) {
-        errorElement.textContent = "";
-      }
-    });
+  hideInputError(input) {
+    const errorSpanEle = this.formElement.querySelector(`.${input.id}_error`);
+    errorSpanEle.textContent = "";
   }
 
   enableValidation() {
