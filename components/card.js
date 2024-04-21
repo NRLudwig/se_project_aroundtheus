@@ -25,14 +25,14 @@ export class Card {
     this.cardElement
       .querySelector(".card__heart-button")
       .addEventListener("click", () => {
-        cardElement
+        this.cardElement
           .querySelector(".card__heart-button")
           .classList.toggle("card__heart-button_active");
       });
     this.cardElement
       .querySelector(".card__delete-button")
-      .addEventListener("click", function () {
-        cardElement.remove();
+      .addEventListener("click", () => {
+        this.cardElement.remove();
       });
     this.cardElement
       .querySelector(".card__image")
