@@ -134,7 +134,7 @@ profileEditBtn.addEventListener("click", function () {
   openModal(profileEditModal);
   fillProfileForm();
   profileValidator.toggleButtonState();
-  // profileValidator.hideInputError();
+  profileValidator.resetValidation();
 });
 addNewImageBtn.addEventListener("click", function () {
   openModal(newPlaceModal);

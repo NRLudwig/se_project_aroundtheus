@@ -27,9 +27,6 @@ export class FormValidator {
   toggleButtonState() {
     if (
       this.inputList.every((input) => {
-        input.validity.valid
-          ? this.hideInputError(input)
-          : (this.btn.disabled = true);
         return input.validity.valid;
       })
     ) {
@@ -37,6 +34,14 @@ export class FormValidator {
     } else {
       this.btn.disabled = true;
     }
+  }
+
+  resetValidation() {
+    this.toggleButtonState();
+
+    this.inputList.forEach((input) => {
+      this.hideInputError(input);
+    });
   }
 
   showInputError(input) {
