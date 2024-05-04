@@ -37,10 +37,7 @@ export class Card {
     this.cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        this.imagePopUpHandler(
-          this.cardElement,
-          this.cardElement.querySelector(".card__image")
-        );
+        this.imagePopUpHandler();
       });
   }
 }
