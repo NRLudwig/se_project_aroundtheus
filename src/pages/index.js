@@ -55,8 +55,7 @@ function creatCard(data) {
   const card = new Card(data, "#card__template", () => {
     imageClickHandler(data);
   });
-  const finalCard = card.generateCard();
-  return finalCard;
+  return card.generateCard();
 }
 
 function imageClickHandler(data) {
@@ -80,7 +79,8 @@ profileEditBtn.addEventListener("click", function () {
   profileValidator.toggleButtonState();
   profileValidator.resetValidation();
 });
-addNewImageBtn.addEventListener("click", function () {
+
+addNewImageBtn.addEventListener("click", () => {
   openNewCardPopup(popupNewCardForm);
   newPlaceValidator.toggleButtonState();
 });
