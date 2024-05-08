@@ -11,7 +11,7 @@ export default class Section {
     });
   }
 
-  addItem() {
-    this._renderer(this._items);
+  addItem(item) {
+    this._gallery.prepend(item);
   }
 }
