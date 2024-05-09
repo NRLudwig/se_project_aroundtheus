@@ -37,7 +37,7 @@ const gallerySection = new Section(
 );
 
 //////////////////////////  functions  //////////////////////////
-function openNewCardPopup(popup) {
+function openPopup(popup) {
   popup.open();
 }
 
@@ -70,17 +70,19 @@ function handleProfileEditSubmit(data) {
 profileValidator.enableValidation();
 newPlaceValidator.enableValidation();
 gallerySection.renderItems();
-// popupWithImage.setEventListeners();
+//////////////////////////  add/set event listeners  //////////////////////////
+popupNewCardForm.setEventListeners();
+popupWithImage.setEventListeners();
+popupEditProfileForm.setEventListeners();
+
 profileEditBtn.addEventListener("click", function () {
   const userProfile = user.getUserInfo();
   inputName.value = userProfile.name;
   inputSubtitle.value = userProfile.about;
-  openNewCardPopup(popupEditProfileForm);
-  profileValidator.toggleButtonState();
+  openPopup(popupEditProfileForm);
   profileValidator.resetValidation();
 });
 
 addNewImageBtn.addEventListener("click", () => {
-  openNewCardPopup(popupNewCardForm);
-  newPlaceValidator.toggleButtonState();
+  openPopup(popupNewCardForm);
 });
