@@ -21,7 +21,7 @@ const user = new UserInfo(userInfoObj);
 //////////////////////////  validators  //////////////////////////
 const profileValidator = new FormValidator(config, profileForm);
 const newPlaceValidator = new FormValidator(config, newPlaceForm);
-//////////////////////////  classes  //////////////////////////
+//////////////////////////  classes  ///////////////////////////
 const popupWithImage = new PopupWithImage(".modal_picture");
 const popupNewCardForm = new PopupWithForm(
   ".modal_new-place",
@@ -42,12 +42,10 @@ function openPopup(popup) {
 }
 
 function handleFormCardSubmit(data) {
-  // debugger;
   cardRenderer(data);
 }
 
 function cardRenderer(data) {
-  // debugger;
   gallerySection.addItem(creatCard(data));
 }
 
@@ -85,4 +83,5 @@ profileEditBtn.addEventListener("click", function () {
 
 addNewImageBtn.addEventListener("click", () => {
   openPopup(popupNewCardForm);
+  newPlaceValidator.toggleButtonState();
 });
