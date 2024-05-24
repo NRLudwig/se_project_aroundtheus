@@ -85,3 +85,5 @@ addNewImageBtn.addEventListener("click", () => {
   openPopup(popupNewCardForm);
   newPlaceValidator.toggleButtonState();
 });
+
+//comment
