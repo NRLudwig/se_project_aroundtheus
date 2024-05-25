@@ -50,3 +50,7 @@ export const userInfoObj = {
   name: ".profile__name",
   about: ".profile__subtitle",
 };
+
+// test
+
+export const serverToken = "84b07c5a-0111-4c47-905f-ba8750f58c8b";

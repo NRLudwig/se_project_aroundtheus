@@ -4,6 +4,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
+import Api from "../components/Api.js";
 import "./index.css";
 import {
   cardGalleryEL,
@@ -16,7 +17,9 @@ import {
   initialCards,
   config,
   userInfoObj,
+  serverToken,
 } from "../utils/constants.js";
+
 const user = new UserInfo(userInfoObj);
 //////////////////////////  validators  //////////////////////////
 const profileValidator = new FormValidator(config, profileForm);
@@ -35,6 +38,18 @@ const gallerySection = new Section(
   { items: initialCards, renderer: cardRenderer },
   cardGalleryEL
 );
+//////////////////////////  API  //////////////////////////
+const apiRequest = new Api(
+  "https://around-api.en.tripleten-services.com/v1",
+  serverToken,
+  apiSetUserInfo
+);
+
+apiRequest.getUserData();
+
+function apiSetUserInfo(data) {
+  user.setUserInfo(data);
+}
 
 //////////////////////////  functions  //////////////////////////
 function openPopup(popup) {
@@ -61,7 +76,8 @@ function imageClickHandler(data) {
 }
 
 function handleProfileEditSubmit(data) {
-  user.setUserInfo({ name: data.name, about: data.about });
+  apiRequest.updateUserData(data);
+  user.setUserInfo(data);
 }
 
 //////////////////////////  on load  //////////////////////////
