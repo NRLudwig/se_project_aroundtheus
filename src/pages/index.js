@@ -14,17 +14,40 @@ import {
   inputSubtitle,
   profileEditBtn,
   addNewImageBtn,
-  initialCards,
   config,
   userInfoObj,
   serverToken,
+  avatarForm,
+  avatarOverlay,
+  imageDeleteForm,
 } from "../utils/constants.js";
-
+const handlerFunctions = {
+  handleDelete: function handleDelete(card, data) {
+    const popupImageDelete = new PopupWithForm(".modal_delete", () => {
+      card.remove();
+      apiCardRequest.deleteCard(data);
+    });
+    openPopup(popupImageDelete);
+    popupImageDelete.setEventListeners();
+  },
+  handleLike: function handleLike(data) {
+    apiCardRequest.likeCard(data);
+  },
+  handleImageClick: function handleImageClick(data) {
+    popupWithImage.open(data);
+  },
+};
 const user = new UserInfo(userInfoObj);
-//////////////////////////  validators  //////////////////////////
+////////////////////////////////////////////////////////////
+///////////////////////   VALIDATORS    ////////////////////
+////////////////////////////////////////////////////////////
 const profileValidator = new FormValidator(config, profileForm);
 const newPlaceValidator = new FormValidator(config, newPlaceForm);
-//////////////////////////  classes  ///////////////////////////
+const avatarFormValidator = new FormValidator(config, avatarForm);
+const imageDeleteFormValidator = new FormValidator(config, imageDeleteForm);
+////////////////////////////////////////////////////////////
+///////////////////////   POPUPS    ////////////////////////
+////////////////////////////////////////////////////////////
 const popupWithImage = new PopupWithImage(".modal_picture");
 const popupNewCardForm = new PopupWithForm(
   ".modal_new-place",
@@ -34,61 +57,87 @@ const popupEditProfileForm = new PopupWithForm(
   ".modal_profile-edit",
   handleProfileEditSubmit
 );
-const gallerySection = new Section(
-  { items: initialCards, renderer: cardRenderer },
-  cardGalleryEL
+const popupAvatarForm = new PopupWithForm(
+  ".modal_change-avatar",
+  popupAvatarFormCallback
 );
-//////////////////////////  API  //////////////////////////
-const apiRequest = new Api(
+////////////////////////////////////////////////////////////
+///////////////////////   API    ///////////////////////////
+////////////////////////////////////////////////////////////
+// profile requests
+const apiProfileRequest = new Api(
   "https://around-api.en.tripleten-services.com/v1",
   serverToken,
-  apiSetUserInfo
+  apiSetUserInfoCallback
 );
-
-apiRequest.getUserData();
-
-function apiSetUserInfo(data) {
+apiProfileRequest.getUserData();
+// card requests
+const apiCardRequest = new Api(
+  "https://around-api.en.tripleten-services.com/v1",
+  serverToken,
+  apiCardRequestCallback
+);
+// avatar requests
+const apiAvatarRequest = new Api(
+  "https://around-api.en.tripleten-services.com/v1",
+  serverToken,
+  apiSetAvatarCallback
+);
+////////////////////////////////////////////////////////////
+///////////////////////   FUNCTIONS    /////////////////////
+////////////////////////////////////////////////////////////
+function apiSetUserInfoCallback(data) {
   user.setUserInfo(data);
 }
-
-//////////////////////////  functions  //////////////////////////
+function apiCardRequestCallback(data) {
+  const gallerySection = new Section(data, cardRenderer, cardGalleryEL);
+  cardRenderer(gallerySection, data);
+}
+function apiSetAvatarCallback(data) {
+  user.setUserAvatar(data);
+}
+function popupAvatarFormCallback(data) {
+  apiAvatarRequest.patchAvatar(data);
+  user.setUserAvatar(data);
+}
 function openPopup(popup) {
   popup.open();
 }
-
 function handleFormCardSubmit(data) {
-  cardRenderer(data);
+  apiCardRequest.postCard(data);
 }
-
-function cardRenderer(data) {
-  gallerySection.addItem(creatCard(data));
+function cardRenderer(section, data) {
+  const card = creatCard(data);
+  section.renderItem(card);
 }
-
 function creatCard(data) {
-  const card = new Card(data, "#card__template", () => {
-    imageClickHandler(data);
-  });
-  return card.generateCard();
+  const card = new Card(data, "#card__template", handlerFunctions);
+  return card.generateCard(data);
 }
-
-function imageClickHandler(data) {
-  popupWithImage.open(data);
-}
-
 function handleProfileEditSubmit(data) {
-  apiRequest.updateUserData(data);
+  apiProfileRequest.updateUserData(data);
   user.setUserInfo(data);
 }
-
-//////////////////////////  on load  //////////////////////////
+////////////////////////////////////////////////////////////
+///////////////////////   ON LOAD   ////////////////////////
+////////////////////////////////////////////////////////////
 profileValidator.enableValidation();
 newPlaceValidator.enableValidation();
-gallerySection.renderItems();
-//////////////////////////  add/set event listeners  //////////////////////////
+avatarFormValidator.enableValidation();
+imageDeleteFormValidator.enableValidation();
+apiCardRequest.getInitaialCards();
+apiAvatarRequest.getAvatar();
+////////////////////////////////////////////////////////////
+/////////////////   EVENT LISTENERS    /////////////////////
+////////////////////////////////////////////////////////////
 popupNewCardForm.setEventListeners();
 popupWithImage.setEventListeners();
 popupEditProfileForm.setEventListeners();
-
+popupAvatarForm.setEventListeners();
+avatarOverlay.addEventListener("click", function () {
+  openPopup(popupAvatarForm);
+  avatarFormValidator.toggleButtonState();
+});
 profileEditBtn.addEventListener("click", function () {
   const userProfile = user.getUserInfo();
   inputName.value = userProfile.name;
@@ -96,10 +145,7 @@ profileEditBtn.addEventListener("click", function () {
   openPopup(popupEditProfileForm);
   profileValidator.resetValidation();
 });
-
 addNewImageBtn.addEventListener("click", () => {
   openPopup(popupNewCardForm);
   newPlaceValidator.toggleButtonState();
 });
-
-//comment
