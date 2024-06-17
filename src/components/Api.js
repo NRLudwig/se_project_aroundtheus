@@ -1,8 +1,8 @@
 export default class Api {
-  constructor(baseUrl, token, callBack) {
+  constructor(baseUrl, token, functionObj) {
     this.baseUrl = baseUrl;
     this.token = token;
-    this.callBack = callBack;
+    this.funcObj = functionObj;
   }
 
   getUserData() {
@@ -15,9 +15,13 @@ export default class Api {
         if (res.ok) {
           return res.json();
         }
+        return Promise.reject(`Error: ${res.stauts}`);
       })
       .then((res) => {
-        this.callBack(res);
+        this.funcObj.setUserInfo(res);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }
 
@@ -32,7 +36,20 @@ export default class Api {
         name: data.name,
         about: data.about,
       }),
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .then((res) => {
+        console.log(res);
+        this.funcObj.renderSavingProfileForm();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   getInitaialCards() {
@@ -41,11 +58,19 @@ export default class Api {
         authorization: this.token,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
       .then((res) => {
         res.forEach((item) => {
-          this.callBack(item);
+          this.funcObj.cardRequest(item);
         });
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }
 
@@ -62,10 +87,19 @@ export default class Api {
       }),
     })
       .then((res) => {
-        return res.json();
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
       })
       .then((res) => {
-        this.callBack(res);
+        console.log(res);
+        this.funcObj.cardRequest(res);
+        this.funcObj.renderSavingNewCardForm();
+      })
+      .catch((err) => {
+        console.log("this is postCard catch");
+        console.error(err);
       });
   }
 
@@ -76,7 +110,17 @@ export default class Api {
         authorization: this.token,
         "content-type": "application/json",
       },
-    }).then(console.log(`${data.name} id-${data._id} has been deleted`));
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .then(console.log(`${data.name} id-${data._id} has been deleted`))
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   likeCard(data) {
@@ -87,7 +131,16 @@ export default class Api {
           authorization: this.token,
           "content-type": "application/json",
         },
-      });
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`Error: ${res.status}`);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
       fetch(`${this.baseUrl}/cards/${data._id}/likes`, {
         method: "PUT",
@@ -95,7 +148,16 @@ export default class Api {
           authorization: this.token,
           "content-type": "application/json",
         },
-      });
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`Error: ${res.status}`);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   }
 
@@ -109,7 +171,21 @@ export default class Api {
       body: JSON.stringify({
         avatar: data.url,
       }),
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .then((res) => {
+        this.funcObj.setAvatar({ url: res.avatar });
+        this.funcObj.renderSavingAvatarForm();
+      })
+      .catch((err) => {
+        console.log(err);
+        console.error(err);
+      });
   }
 
   getAvatar() {
@@ -123,9 +199,19 @@ export default class Api {
         if (res.ok) {
           return res.json();
         }
+        return Promise.reject(`Error: ${res.status}`);
       })
       .then((res) => {
-        this.callBack({ url: res.avatar });
+        this.funcObj.setAvatar({ url: res.avatar });
+      })
+      .catch((err) => {
+        console.error(err);
       });
+  }
+
+  getServerData() {
+    this.getUserData();
+    this.getAvatar();
+    this.getInitaialCards();
   }
 }

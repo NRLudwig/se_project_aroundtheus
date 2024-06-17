@@ -21,23 +21,43 @@ import {
   avatarOverlay,
   imageDeleteForm,
 } from "../utils/constants.js";
+const user = new UserInfo(userInfoObj);
 const handlerFunctions = {
   handleDelete: function handleDelete(card, data) {
-    const popupImageDelete = new PopupWithForm(".modal_delete", () => {
-      card.remove();
-      apiCardRequest.deleteCard(data);
-    });
     openPopup(popupImageDelete);
-    popupImageDelete.setEventListeners();
+    popupImageDelete.setDeleteSubmitListener(card, data);
   },
   handleLike: function handleLike(data) {
-    apiCardRequest.likeCard(data);
+    apiCall.likeCard(data);
   },
   handleImageClick: function handleImageClick(data) {
     popupWithImage.open(data);
   },
 };
-const user = new UserInfo(userInfoObj);
+const apiFunctionObj = {
+  setUserInfo: function apiSetUserInfoCallback(data) {
+    user.setUserInfo(data);
+  },
+  cardRequest: function apiCardRequestCallback(data) {
+    cardRenderer(gallerySection, data);
+  },
+  setAvatar: function apiSetAvatarCallback(data) {
+    user.setUserAvatar(data);
+  },
+  renderSavingProfileForm: function renderSaving() {
+    popupEditProfileForm.renderSaving(false);
+  },
+  renderSavingAvatarForm: function renderSaving() {
+    popupAvatarForm.renderSaving(false);
+  },
+  renderSavingNewCardForm: function renderSaving() {
+    popupNewCardForm.renderSaving(false);
+  },
+};
+////////////////////////////////////////////////////////////
+///////////////////////    sections     ////////////////////
+////////////////////////////////////////////////////////////
+const gallerySection = new Section(cardRenderer, cardGalleryEL);
 ////////////////////////////////////////////////////////////
 ///////////////////////   VALIDATORS    ////////////////////
 ////////////////////////////////////////////////////////////
@@ -48,6 +68,10 @@ const imageDeleteFormValidator = new FormValidator(config, imageDeleteForm);
 ////////////////////////////////////////////////////////////
 ///////////////////////   POPUPS    ////////////////////////
 ////////////////////////////////////////////////////////////
+const popupImageDelete = new PopupWithForm(
+  ".modal_delete",
+  handleDeleteFormSubmit
+);
 const popupWithImage = new PopupWithImage(".modal_picture");
 const popupNewCardForm = new PopupWithForm(
   ".modal_new-place",
@@ -59,52 +83,32 @@ const popupEditProfileForm = new PopupWithForm(
 );
 const popupAvatarForm = new PopupWithForm(
   ".modal_change-avatar",
-  popupAvatarFormCallback
+  handleAvatarFormSubmit
 );
 ////////////////////////////////////////////////////////////
 ///////////////////////   API    ///////////////////////////
 ////////////////////////////////////////////////////////////
-// profile requests
-const apiProfileRequest = new Api(
+const apiCall = new Api(
   "https://around-api.en.tripleten-services.com/v1",
   serverToken,
-  apiSetUserInfoCallback
-);
-apiProfileRequest.getUserData();
-// card requests
-const apiCardRequest = new Api(
-  "https://around-api.en.tripleten-services.com/v1",
-  serverToken,
-  apiCardRequestCallback
-);
-// avatar requests
-const apiAvatarRequest = new Api(
-  "https://around-api.en.tripleten-services.com/v1",
-  serverToken,
-  apiSetAvatarCallback
+  apiFunctionObj
 );
 ////////////////////////////////////////////////////////////
 ///////////////////////   FUNCTIONS    /////////////////////
 ////////////////////////////////////////////////////////////
-function apiSetUserInfoCallback(data) {
-  user.setUserInfo(data);
+function handleDeleteFormSubmit(card, data) {
+  card.remove();
+  apiCall.deleteCard(data);
 }
-function apiCardRequestCallback(data) {
-  const gallerySection = new Section(data, cardRenderer, cardGalleryEL);
-  cardRenderer(gallerySection, data);
-}
-function apiSetAvatarCallback(data) {
-  user.setUserAvatar(data);
-}
-function popupAvatarFormCallback(data) {
-  apiAvatarRequest.patchAvatar(data);
+function handleAvatarFormSubmit(data) {
+  apiCall.patchAvatar(data);
   user.setUserAvatar(data);
 }
 function openPopup(popup) {
   popup.open();
 }
 function handleFormCardSubmit(data) {
-  apiCardRequest.postCard(data);
+  apiCall.postCard(data);
 }
 function cardRenderer(section, data) {
   const card = creatCard(data);
@@ -115,7 +119,7 @@ function creatCard(data) {
   return card.generateCard(data);
 }
 function handleProfileEditSubmit(data) {
-  apiProfileRequest.updateUserData(data);
+  apiCall.updateUserData(data);
   user.setUserInfo(data);
 }
 ////////////////////////////////////////////////////////////
@@ -125,8 +129,7 @@ profileValidator.enableValidation();
 newPlaceValidator.enableValidation();
 avatarFormValidator.enableValidation();
 imageDeleteFormValidator.enableValidation();
-apiCardRequest.getInitaialCards();
-apiAvatarRequest.getAvatar();
+apiCall.getServerData();
 ////////////////////////////////////////////////////////////
 /////////////////   EVENT LISTENERS    /////////////////////
 ////////////////////////////////////////////////////////////
