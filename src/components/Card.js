@@ -1,3 +1,5 @@
+import { cardInfoObj } from "../utils/constants.js";
+
 export class Card {
   constructor(data, cardSelector, functionObject) {
     this._title = data.name;
@@ -44,7 +46,9 @@ export class Card {
     this.cardElement
       .querySelector(".card__delete-button")
       .addEventListener("click", () => {
-        this._handleDeleteButton(this.cardElement, cardDataObj);
+        cardInfoObj.data = cardDataObj;
+        cardInfoObj.cardElement = this.cardElement;
+        this._handleDeleteButton(cardInfoObj);
       });
     this.cardElement
       .querySelector(".card__image")

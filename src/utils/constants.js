@@ -27,6 +27,6 @@ export const userInfoObj = {
   avatar: ".profile__image",
 };
 
-// test
+export let cardInfoObj = {};
 
 export const serverToken = "84b07c5a-0111-4c47-905f-ba8750f58c8b";

@@ -117,7 +117,6 @@ export default class Api {
         }
         return Promise.reject(`Error: ${res.status}`);
       })
-      .then(console.log(`${data.name} id-${data._id} has been deleted`))
       .catch((err) => {
         console.error(err);
       });

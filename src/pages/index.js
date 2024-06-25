@@ -23,9 +23,9 @@ import {
 } from "../utils/constants.js";
 const user = new UserInfo(userInfoObj);
 const handlerFunctions = {
-  handleDelete: function handleDelete(card, data) {
+  handleDelete: function handleDelete(data) {
     openPopup(popupImageDelete);
-    popupImageDelete.setDeleteSubmitListener(card, data);
+    popupImageDelete.setDeleteSubmitListener(data);
   },
   handleLike: function handleLike(data) {
     apiCall.likeCard(data);
@@ -96,9 +96,9 @@ const apiCall = new Api(
 ////////////////////////////////////////////////////////////
 ///////////////////////   FUNCTIONS    /////////////////////
 ////////////////////////////////////////////////////////////
-function handleDeleteFormSubmit(card, data) {
-  card.remove();
-  apiCall.deleteCard(data);
+function handleDeleteFormSubmit(data) {
+  data.cardElement.remove();
+  apiCall.deleteCard(data.data);
 }
 function handleAvatarFormSubmit(data) {
   apiCall.patchAvatar(data);

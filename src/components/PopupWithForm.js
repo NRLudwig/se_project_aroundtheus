@@ -33,11 +33,11 @@ export default class PopupWithForm extends Popup {
     this.formElement.addEventListener("submit", this._handleSubmitClick);
   }
 
-  setDeleteSubmitListener(card, data) {
+  setDeleteSubmitListener(data) {
     super.setEventListeners();
     this.formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this.formSubmitHandler(card, data);
+      this.formSubmitHandler(data);
       this.close();
       this.formElement.reset();
     });
