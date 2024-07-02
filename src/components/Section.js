@@ -1,17 +1,16 @@
 export default class Section {
-  constructor({ items, renderer }, gallerySelector) {
+  constructor(renderer, gallerySelector) {
     this._gallery = gallerySelector;
-    this._items = items;
-    this._renderer = renderer;
+    this.renderer = renderer;
   }
 
-  renderItems() {
-    this._items.forEach((item) => {
-      this._renderer(item);
+  renderItems(items) {
+    items.forEach((item) => {
+      this.renderer(item);
     });
   }
 
-  addItem(item) {
+  renderItem(item) {
     this._gallery.prepend(item);
   }
 }
