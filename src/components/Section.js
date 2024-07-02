@@ -4,11 +4,9 @@ export default class Section {
     this.renderer = renderer;
   }
 
-  renderItems() {
-    console.log(items);
+  renderItems(items) {
     items.forEach((item) => {
-      this.renderer(this._gallery, item);
-      console.log(item);
+      this.renderer(item);
     });
   }
 
