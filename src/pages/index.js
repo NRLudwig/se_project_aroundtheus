@@ -1,5 +1,6 @@
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidation.js";
+import PopupDeleteConfirmation from "../components/PopupDeleteConfirmation.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
@@ -46,11 +47,10 @@ const gallerySection = new Section(cardRenderer, cardGalleryEL);
 const profileValidator = new FormValidator(config, profileForm);
 const newPlaceValidator = new FormValidator(config, newPlaceForm);
 const avatarFormValidator = new FormValidator(config, avatarForm);
-const imageDeleteFormValidator = new FormValidator(config, imageDeleteForm);
 ////////////////////////////////////////////////////////////
 ///////////////////////   POPUPS    ////////////////////////
 ////////////////////////////////////////////////////////////
-const popupImageDelete = new PopupWithForm(
+const popupImageDelete = new PopupDeleteConfirmation(
   ".modal_delete",
   handleDeleteFormSubmit
 );
@@ -80,7 +80,9 @@ const apiCall = new Api(
 function handleDeleteFormSubmit(data) {
   apiCall
     .deleteCard(data.data)
-    .then(data.cardElement.remove())
+    .then(() => {
+      data.cardElement.remove();
+    })
     .catch((err) => {
       console.error(err);
     });
@@ -92,10 +94,12 @@ function handleAvatarFormSubmit(data) {
       user.setUserAvatar(data);
       popupAvatarForm.close();
       avatarForm.reset();
-      popupAvatarForm.renderSaving(false);
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      popupAvatarForm.renderSaving(false);
     });
 }
 function openPopup(popup) {
@@ -108,10 +112,12 @@ function handleFormCardSubmit(data) {
       cardRenderer(cardData);
       popupNewCardForm.close();
       newPlaceForm.reset();
-      popupNewCardForm.renderSaving(false);
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      popupNewCardForm.renderSaving(false);
     });
 }
 function cardRenderer(data) {
@@ -129,10 +135,12 @@ function handleProfileEditSubmit(data) {
       user.setUserInfo(userData);
       popupEditProfileForm.close();
       profileForm.reset();
-      popupEditProfileForm.renderSaving(false);
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      popupEditProfileForm.renderSaving(false);
     });
 }
 ////////////////////////////////////////////////////////////
@@ -141,7 +149,6 @@ function handleProfileEditSubmit(data) {
 profileValidator.enableValidation();
 newPlaceValidator.enableValidation();
 avatarFormValidator.enableValidation();
-imageDeleteFormValidator.enableValidation();
 
 Promise.all([apiCall.getInitialCards(), apiCall.getUserData()])
   .then(([cardData, userData]) => {
