@@ -5,7 +5,6 @@ export const avatarOverlay = document.querySelector(".profile__image_wrapper");
 export const profileForm = document.querySelector(".modal__form_profile");
 export const newPlaceForm = document.querySelector(".modal__form_new-place");
 export const avatarForm = document.querySelector(".modal__form_change-avatar");
-export const imageDeleteForm = document.querySelector(".modal__form_delete");
 //////////////////////////  inputs  //////////////////////////
 export const inputName = document.querySelector(".modal__text-input_type_name");
 export const inputSubtitle = document.querySelector(

@@ -29,7 +29,8 @@ export class Card {
     this.cardElement
       .querySelector(".card__heart-button")
       .addEventListener("click", () => {
-        this._handleLikeButton(cardDataObj);
+        this._handleLikeButton(this, cardDataObj);
+        // console.log(this);
         cardDataObj.isLiked = !cardDataObj.isLiked;
       });
 

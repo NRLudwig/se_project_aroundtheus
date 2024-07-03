@@ -11,12 +11,10 @@ export default class PopupDeleteConformation extends Popup {
 
   setDeleteSubmitListener(data) {
     this.data = data;
-    super.setEventListeners();
     this.confimBtn.addEventListener("click", this.deleteHandler);
   }
 
   deleteHandler() {
     this.confirmCallback(this.data);
-    this.close();
   }
 }

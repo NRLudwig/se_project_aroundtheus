@@ -10,7 +10,6 @@ export default class PopupWithForm extends Popup {
     this.formSubmitHandler = this.formSubmitHandler.bind(this);
     this._handleSubmitClick = this._handleSubmitClick.bind(this);
     this._saveButton = this.formElement.querySelector(".modal__button-save");
-    this.deleteHandler = this.deleteHandler.bind(this);
   }
 
   _handleSubmitClick(evt) {
@@ -18,8 +17,6 @@ export default class PopupWithForm extends Popup {
     this.renderSaving(true);
     const inputData = this._getInputValues();
     this.formSubmitHandler(inputData);
-    // this.close();
-    // this.formElement.reset();
   }
 
   _getInputValues() {
@@ -33,17 +30,6 @@ export default class PopupWithForm extends Popup {
   setEventListeners() {
     super.setEventListeners();
     this.formElement.addEventListener("submit", this._handleSubmitClick);
-  }
-
-  setDeleteSubmitListener(data) {
-    this.data = data;
-    super.setEventListeners();
-    this.formElement.addEventListener("submit", this.deleteHandler);
-  }
-
-  deleteHandler() {
-    this.formSubmitHandler(this.data);
-    this.close();
   }
 
   renderSaving(isSaving) {

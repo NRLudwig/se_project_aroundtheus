@@ -20,7 +20,6 @@ import {
   serverToken,
   avatarForm,
   avatarOverlay,
-  imageDeleteForm,
 } from "../utils/constants.js";
 const user = new UserInfo(userInfoObj);
 const handlerFunctions = {
@@ -28,10 +27,15 @@ const handlerFunctions = {
     openPopup(popupImageDelete);
     popupImageDelete.setDeleteSubmitListener(data);
   },
-  handleLike: function handleLike(cardData) {
-    apiCall.likeCard(cardData).then((res) => {
-      this.checkLike(res);
-    });
+  handleLike: function handleLike(card, cardData) {
+    apiCall
+      .likeCard(cardData)
+      .then((res) => {
+        card.checkLike(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
   handleImageClick: function handleImageClick(data) {
     popupWithImage.open(data);
@@ -82,6 +86,7 @@ function handleDeleteFormSubmit(data) {
     .deleteCard(data.data)
     .then(() => {
       data.cardElement.remove();
+      popupImageDelete.close();
     })
     .catch((err) => {
       console.error(err);
@@ -163,6 +168,7 @@ Promise.all([apiCall.getInitialCards(), apiCall.getUserData()])
 ////////////////////////////////////////////////////////////
 /////////////////   EVENT LISTENERS    /////////////////////
 ////////////////////////////////////////////////////////////
+popupImageDelete.setEventListeners();
 popupNewCardForm.setEventListeners();
 popupWithImage.setEventListeners();
 popupEditProfileForm.setEventListeners();
