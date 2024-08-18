@@ -39,6 +39,10 @@
   line-height: 1.2;
 }
 
+.modal__heading_delete {
+  margin-bottom: 38px;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
@@ -77,6 +81,21 @@
   cursor: pointer;
 }
 
+.modal__button-confirm {
+  width: 358px;
+  height: 50px;
+  border: 0;
+  border-radius: 2px;
+  color: #fff;
+  background-color: #000;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  transition: ease-in-out 0.1s;
+  cursor: pointer;
+}
+
 .input_error {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   color: #ff0000;
@@ -93,6 +112,10 @@
 }
 
 .modal__button-save:hover {
+  opacity: 0.8;
+}
+
+.modal__button-confirm:hover {
   opacity: 0.8;
 }
 
@@ -138,8 +161,16 @@
     margin-bottom: 75px;
   }
 
+  .modal__heading_delete {
+    margin-bottom: 38px;
+  }
+
   .modal__button-save {
     margin-top: 15px;
+  }
+  .modal__button-confirm {
+    width: 282px;
+    padding-top: 0;
   }
 
   .modal__button-close {

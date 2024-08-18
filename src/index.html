@@ -19,15 +19,16 @@
       </header>
       <main class="content-wrapper">
         <section class="profile">
-          <img
-            class="profile__image"
-            src="<%= require('./images/jacques-cousteau.svg')%>"
-            alt="avatar"
-          />
+          <div class="profile__image_wrapper">
+            <img
+                class="profile__image"
+                alt="avatar"
+            />
+          </div>
           <div class="profile__info-wrapper">
-            <h1 class="profile__name">Jacques Cousteau</h1>
+            <h1 class="profile__name"></h1>
             <button class="profile__edit-button" type="button"></button>
-            <p class="profile__subtitle">Explorer</p>
+            <p class="profile__subtitle"></p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -107,7 +108,7 @@
             type="submit"
             disabled
           >
-            Create
+            Save
           </button>
           <button
             class="modal__button-close modal__button-close_new-place"
@@ -125,6 +126,56 @@
         ></button>
         <img class="modal-picture__image" src="" alt="" />
         <p class="modal-picture__title"></p>
+      </div>
+    </div>
+
+    <div class="modal modal_delete">
+      <div class="modal__container">
+        <h2 class="modal__heading modal__heading_delete">Are you sure?</h2>
+        <form class="modal__form modal__form_delete">
+          <button
+            class="modal__button-save modal__button-save_delete"
+            type="button"
+
+          >
+            yes
+          </button>
+        </form>
+          <button
+            class="modal__button-close modal__button-close_delete"
+            type="button"
+          ></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal modal_change-avatar">
+      <div class="modal__container">
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form novalidate class="modal__form modal__form_change-avatar">
+          <input
+            id="change-avatar_title-input"
+            class="modal__text-input modal__text-input_type_url"
+            type="url"
+            placeholder="url"
+            required
+            name="url"
+          />
+          <span class="input_error change-avatar_title-input_error"></span>
+          <!-- second span is just to keep the first in place -->
+          <span class="input_error change-avatar_title-input_error"></span>
+          <button
+            class="modal__button-save modal__button-save_change-avatar"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
+          <button
+            class="modal__button-close modal__button-close_change-avatar"
+            type="button"
+          ></button>
+        </form>
       </div>
     </div>
 
